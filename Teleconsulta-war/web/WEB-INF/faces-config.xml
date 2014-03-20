@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!-- =========== Archivo de configuración ================================== -->
+
+<faces-config version="2.0"
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
+
+    
+    <managed-bean>
+        <description>Managed bean encargado de todo</description>
+        <managed-bean-name>teleconsultaBean</managed-bean-name>
+        <managed-bean-class>com.teleconsulta.beans.TeleconsultaBean</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <!-- Reglas de navegación -->
+    <navigation-rule>
+        <from-view-id>/index.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>paciente</from-outcome>
+            <to-view-id>/paciente.jsf</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/index.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>cliente</from-outcome>
+            <to-view-id>/catalogoCliente.jsf</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/paciente.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>inicio</from-outcome>
+            <to-view-id>/index.jsf</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+</faces-config>
