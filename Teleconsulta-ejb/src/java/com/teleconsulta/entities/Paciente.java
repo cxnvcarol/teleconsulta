@@ -44,7 +44,7 @@ public class Paciente {
     private Date fechaNacimiento;
     private String genero;
     private int estatura;
-    private String contraseña;
+    private String contrasena;
     /**
      * Devuelve un lista con todos las compras del usuario
      */
@@ -126,7 +126,7 @@ public class Paciente {
     }
 
     public int getEdad() {
-        return (new Date().getYear()) - fechaNacimiento.getYear();
+        return (new Date().getYear()) - getFechaNacimiento().getYear();
     }
     public int getEstatura()
     {
@@ -161,7 +161,7 @@ public class Paciente {
     public boolean alarmaPresion(double sistolica, double diastolica) {
         int edad = getEdad();
         if (edad < 18) {
-            if (genero.equals(MASCULINO)) {
+            if (getGenero().equals(MASCULINO)) {
                 if (sistolica >= 105 && sistolica <= 135 || diastolica >= 60 && diastolica <= 86) {
                     Alarma a = new Alarma(new Date(), TIPO_ALARMA_HIP_BAJA, ALARMA_HIP_BAJA);
                     alarmas.add(a);
@@ -171,7 +171,7 @@ public class Paciente {
                     alarmas.add(a);
                     return true;
                 }
-            } else if (genero.equals(FEMENINO)) {
+            } else if (getGenero().equals(FEMENINO)) {
                 if (sistolica >= 100 && sistolica <= 130 || diastolica >= 60 && diastolica <= 85) {
                     Alarma a = new Alarma(new Date(), TIPO_ALARMA_HIP_BAJA, ALARMA_HIP_BAJA);
                     alarmas.add(a);
@@ -211,10 +211,10 @@ public class Paciente {
      * @return
      */
     public boolean alarmaPeso(double peso) {
-        double IMC = peso / (estatura * estatura)/10000;// /10000 porque la estatura está en cm
+        double IMC = peso / (getEstatura() * getEstatura())/10000;// /10000 porque la estatura está en cm
         int edad = getEdad();
         if (edad < 20) {
-            if (genero.equals(MASCULINO)) {
+            if (getGenero().equals(MASCULINO)) {
                 if (IMC <= 19) {
                     Alarma a = new Alarma(new Date(), TIPO_ALARMA_PESO_BAJO, ALARMA_PESO_BAJO);
                     alarmas.add(a);
@@ -229,7 +229,7 @@ public class Paciente {
                     return true;
                 }
             }
-            if (genero.equals(FEMENINO)) {
+            if (getGenero().equals(FEMENINO)) {
                 if (IMC <= 18) {
                     Alarma a = new Alarma(new Date(), TIPO_ALARMA_PESO_BAJO, ALARMA_PESO_BAJO);
                     alarmas.add(a);
@@ -275,15 +275,50 @@ public class Paciente {
     /**
      * @return the contraseña
      */
-    public String getContraseña() {
-        return contraseña;
+    public String getContrasena() {
+        return contrasena;
     }
 
     /**
      * @param contraseña the contraseña to set
      */
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
+    public void setContrasena(String contraseña) {
+        this.contrasena = contraseña;
+    }
+
+    /**
+     * @param estatura the estatura to set
+     */
+    public void setEstatura(int estatura) {
+        this.estatura = estatura;
+    }
+
+    /**
+     * @param nombre the nombre to set
+     */
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    /**
+     * @param fechaNacimiento the fechaNacimiento to set
+     */
+    public void setFechaNacimiento(Date fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
+    /**
+     * @param genero the genero to set
+     */
+    public void setGenero(String genero) {
+        this.genero = genero;
     }
     
 }
