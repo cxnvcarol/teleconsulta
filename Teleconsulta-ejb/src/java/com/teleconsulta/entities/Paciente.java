@@ -44,6 +44,7 @@ public class Paciente {
     private Date fechaNacimiento;
     private String genero;
     private int estatura;
+    private String contraseña;
     /**
      * Devuelve un lista con todos las compras del usuario
      */
@@ -269,6 +270,20 @@ public class Paciente {
             }
         }
         return false;
+    }
+
+    /**
+     * @return the contraseña
+     */
+    public String getContraseña() {
+        return contraseña;
+    }
+
+    /**
+     * @param contraseña the contraseña to set
+     */
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
     }
     
 }

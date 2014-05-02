@@ -14,6 +14,13 @@
         <managed-bean-class>com.teleconsulta.beans.TeleconsultaBean</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
+    
+    <managed-bean>
+        <description>Managed bean encargado de login</description>
+        <managed-bean-name>loginBean</managed-bean-name>
+        <managed-bean-class>com.teleconsulta.beans.LoginBean</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
 
     <!-- Reglas de navegación -->
     <navigation-rule>

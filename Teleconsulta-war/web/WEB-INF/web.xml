@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
-
     <!-- Mapeo remote services -->
     <!--
     <servlet>
@@ -34,7 +33,6 @@
         <param-name>com.icesoft.faces.gmapKey</param-name>
         <param-value>ABQIAAAADlu0ZiSTam64EKaCQr9eTRTOTuQNzJNXRlYRLknj4cQ89tFfpxTEqxQnVWL4k55OPICgF5_SOZE06A</param-value>
     </context-param>
-
     <!-- Mapeo de los JSF -->
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
@@ -62,16 +60,25 @@
         <servlet-name>Resource Servlet</servlet-name>
         <url-pattern>/xmlhttp/*</url-pattern>
     </servlet-mapping>
-
     <!-- Configuración de la sesión -->
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
-
     <!-- Página de inicio -->
     <welcome-file-list>
         <welcome-file>index.jsf</welcome-file>
     </welcome-file-list>
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <form-login-config>
+            <form-login-page>/login.jsf</form-login-page>
+            <form-error-page>/login.jsf</form-error-page>
+        </form-login-config>
+    </login-config>
+    <security-role>
+        <description/>
+        <role-name>rolePaciente</role-name>
+    </security-role>
 </web-app>
