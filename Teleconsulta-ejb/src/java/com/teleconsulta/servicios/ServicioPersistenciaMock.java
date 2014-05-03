@@ -17,13 +17,16 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 /**
  * Implementación de los servicios de persistencia
  * @author Juan Sebastián Urrego
  */
-@Stateless
+//@Stateless
+@EJB(beanInterface = IServicioPersistenciaMockLocal.class, beanName = 
+"ServicioPersistenciaMock", name = "servicioPersistencia")
 public class ServicioPersistenciaMock implements  IServicioPersistenciaMockLocal {
 
     //-----------------------------------------------------------

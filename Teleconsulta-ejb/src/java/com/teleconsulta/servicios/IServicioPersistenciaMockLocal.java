@@ -11,13 +11,14 @@
  */
 
 package com.teleconsulta.servicios;
+import javax.ejb.EJB;
 import javax.ejb.Local;
 
 /**
  * Contrato funcional de los servicios de persistencia de manera local.
  * @author Juan Sebastián Urrego
  */
-@Local
+//@EJB(beanInterface = IServicioPersistenciaMockLocal.class, beanName = "ServicioPersistencia", name = "servicioPersistencia")
 public interface IServicioPersistenciaMockLocal
 {
 
