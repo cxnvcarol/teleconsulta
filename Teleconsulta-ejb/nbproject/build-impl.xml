@@ -781,17 +781,17 @@ exists or setup the property manually. For example like this:
     </target>
     <target depends="compile,-library-inclusion-in-archive-weblogic,-library-inclusion-in-archive-by-user" name="library-inclusion-in-archive"/>
     <target if="is.jars.in.ejbjar" name="-library-inclusion-in-archive-by-user">
-        <copyfiles files="${libs.Mongo.classpath}" todir="${build.classes.dir}"/>
+        <copyfiles files="${file.reference.mongo-java-driver-2.11.4.jar}" todir="${build.classes.dir}"/>
     </target>
     <target if="is.server.weblogic" name="-library-inclusion-in-archive-weblogic">
-        <basename file="${libs.Mongo.classpath}" property="manifest.libs.Mongo.classpath"/>
+        <basename file="${file.reference.mongo-java-driver-2.11.4.jar}" property="manifest.file.reference.mongo-java-driver-2.11.4.jar"/>
         <manifest file="${build.ear.classes.dir}/META-INF/MANIFEST.MF" mode="update">
             <attribute name="Extension-List" value="jar-1 "/>
-            <attribute name="jar-1-Extension-Name" value="${manifest.libs.Mongo.classpath}"/>
+            <attribute name="jar-1-Extension-Name" value="${manifest.file.reference.mongo-java-driver-2.11.4.jar}"/>
         </manifest>
     </target>
     <target depends="compile" name="library-inclusion-in-manifest">
-        <copyfiles files="${libs.Mongo.classpath}" todir="${dist.ear.dir}/lib"/>
+        <copyfiles files="${file.reference.mongo-java-driver-2.11.4.jar}" todir="${dist.ear.dir}/lib"/>
         <manifest file="${build.ear.classes.dir}/META-INF/MANIFEST.MF" mode="update"/>
     </target>
     <target name="-copy-meta-inf">
