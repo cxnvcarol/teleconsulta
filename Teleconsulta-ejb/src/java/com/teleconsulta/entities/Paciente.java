@@ -14,6 +14,7 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 
@@ -53,6 +54,7 @@ public class Paciente implements Serializable{
     private String genero;
     private int estatura;
     private String contrasena;
+    private String login;
     /**
      * Devuelve un lista con todos las compras del usuario
      */
@@ -63,6 +65,10 @@ public class Paciente implements Serializable{
     private List<MedidaPresion> presiones;
     @OneToMany
     private List<Alarma> alarmas;
+    
+    
+    @ManyToOne
+    private Usuario medico;
 
     //-----------------------------------------------------------
     // Constructores
@@ -81,7 +87,6 @@ public class Paciente implements Serializable{
      *
      * @param nombre Nombre del usuario
      * @param contraseña Constraseña del usuario
-     * @param tipo Tipo de usuario
      */
     public Paciente(String documento, String nombre, Date fechaNacimiento, String genero, int estatura) {
         this.id = documento;
@@ -328,12 +333,41 @@ public class Paciente implements Serializable{
     public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
+    
 
     /**
      * @param genero the genero to set
      */
     public void setGenero(String genero) {
         this.genero = genero;
+    }
+
+    /**
+     * @return the login
+     */
+    public String getLogin() {
+        return login;
+    }
+
+    /**
+     * @param login the login to set
+     */
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    /**
+     * @return the medico
+     */
+    public Usuario getMedico() {
+        return medico;
+    }
+
+    /**
+     * @param medico the medico to set
+     */
+    public void setMedico(Usuario medico) {
+        this.medico = medico;
     }
     
 }

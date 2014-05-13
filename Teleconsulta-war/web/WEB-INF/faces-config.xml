@@ -34,8 +34,12 @@
     <navigation-rule>
         <from-view-id>/index.xhtml</from-view-id>
         <navigation-case>
-            <from-outcome>cliente</from-outcome>
-            <to-view-id>/catalogoCliente.jsf</to-view-id>
+            <from-outcome>medico</from-outcome>
+            <to-view-id>/catalogoMedico.jsf</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>admin</from-outcome>
+            <to-view-id>/catalogoAdmin.jsf</to-view-id>
         </navigation-case>
     </navigation-rule>
 
@@ -43,6 +47,53 @@
         <from-view-id>/paciente.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>inicio</from-outcome>
+            <to-view-id>/index.jsf</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/login.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>administrador</from-outcome>
+            <to-view-id>/index.jsf</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/login.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>medico</from-outcome>
+            <to-view-id>/catalogoMedico.jsf</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/login.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>login</from-outcome>
+            <to-view-id>/login.jsf</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/catalogoMedico.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>agregarPaciente</from-outcome>
+            <to-view-id>/agregarPaciente.jsf</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/agregarPaciente.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>medico</from-outcome>
+            <to-view-id>/catalogoMedico.jsf</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/agregarPaciente.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>administrador</from-outcome>
             <to-view-id>/index.jsf</to-view-id>
         </navigation-case>
     </navigation-rule>

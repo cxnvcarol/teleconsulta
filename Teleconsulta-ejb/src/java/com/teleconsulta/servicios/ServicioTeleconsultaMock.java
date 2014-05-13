@@ -93,4 +93,9 @@ public class ServicioTeleconsultaMock implements IServicioTeleconsultaMockLocal 
         persistencia.update(p);
         return alarma ? p.ultimaAlarma() : "presion: sin alarmas";
     }
+
+    @Override
+    public Paciente darPorLogin(String login) {
+        return persistencia.findByLogin(login);
+    }
 }

@@ -15,6 +15,7 @@ import com.teleconsulta.entities.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -71,7 +72,7 @@ public class ServicioPersistenciaMock implements  IServicioPersistenciaMockLocal
         {
             EntityManagerFactory ef=Persistence.createEntityManagerFactory("Teleconsulta-ejbPU");
             entityManager=ef.createEntityManager();
-            if(findAll(Paciente.class).isEmpty())
+            if(findAll(Usuario.class).isEmpty())
             {
                 createScenario();
             }
@@ -79,13 +80,23 @@ public class ServicioPersistenciaMock implements  IServicioPersistenciaMockLocal
         }
     }
 
-    public void createScenario(){
+    public void createScenario2(){
          for(int i=0;i<10;i++)
             {
                 Date fNac=new Date();
                 fNac.setYear(fNac.getYear()-5-i*i);
                 Paciente nuevo=new Paciente("000"+i,"Maria Jose "+(i+1), fNac,(i%3==0?Paciente.MASCULINO:Paciente.FEMENINO),150);
                 create(nuevo);
+            }
+    }
+    
+    public void createScenario(){
+        Usuario administrador=new Usuario("admin", "adminadmin", TipoUsuario.Administrador);
+                create(administrador);
+         for(int i=0;i<10;i++)
+            {
+                Usuario medico=new Usuario("frank0"+i, "frankestein", TipoUsuario.Medico);
+                create(medico);                
             }
     }
     //-----------------------------------------------------------
@@ -178,7 +189,19 @@ public class ServicioPersistenciaMock implements  IServicioPersistenciaMockLocal
     @Override
     public Object findById(Class c, Object id) {
         Object returned=entityManager.find(c, id);
-        entityManager.refresh(returned);
+        if(returned!=null) entityManager.refresh(returned);
         return returned;
+    }
+
+    @Override
+    public Paciente findByLogin(String login) {
+        List aa = findAll(Paciente.class);
+        for (Iterator it = aa.iterator(); it.hasNext();) {
+            Paciente object = (Paciente)it.next();
+            if(object.getLogin().equals(login))
+                return object;            
+        }
+        return null;
+        //return (Paciente) entityManager.createQuery("select O from " + Paciente.class.getSimpleName() + " as O where login="+login).getResultList().get(0);
     }
 }

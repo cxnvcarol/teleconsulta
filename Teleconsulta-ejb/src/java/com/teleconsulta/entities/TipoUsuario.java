@@ -17,5 +17,5 @@ package com.teleconsulta.entities;
  */
 public enum TipoUsuario
 {
-    Administrador,Cliente
+    Administrador,Medico
 }

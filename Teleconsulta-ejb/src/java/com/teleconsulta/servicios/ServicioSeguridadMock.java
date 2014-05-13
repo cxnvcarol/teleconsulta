@@ -11,7 +11,9 @@
 
 package com.teleconsulta.servicios;
 
+import com.losalpes.excepciones.AutenticacionException;
 import com.teleconsulta.entities.Paciente;
+import com.teleconsulta.entities.Usuario;
 
 /**
  * Clase que se encarga de la autenticación de un usuario en el sistema
@@ -52,25 +54,27 @@ public class ServicioSeguridadMock implements IServicioSeguridadMockLocal
      * @return usuario Retorna el objeto que contiene la información del usuario que ingreso al sistema.
      */
     @Override
-    public Paciente ingresar(String id, String contraseña)
+    public Usuario ingresar(String login, String contraseña) throws AutenticacionException
     {
    
-        Paciente u = (Paciente) persistencia.findById(Paciente.class, id);
+        Usuario u = (Usuario) persistencia.findById(Usuario.class, login);
 
         if (u != null)
         {
-            if (u.getId().equals(id) && u.getContrasena().equals(contraseña))
+            if (u.getLogin().equals(login) && u.getContraseña().equals(contraseña))
             {
                 return u;
             } 
             else
             {
-                return null;
+                throw new AutenticacionException("La contraseña no es válida. Por favor, asegúrate de que el bloqueo de mayúsculas no está activado e inténtalo de nuevo.");
             }
         } 
         else
         {
-           return null;
+            throw new AutenticacionException("El nombre de usuario proporcionado no pertenece a ninguna cuenta.");
         }
     }
+
+
 }

@@ -9,8 +9,6 @@
 
     <ui:param name="titulo" value="Teleconsulta" />
     <ui:define name="body">
-
-        <h1>Pacientes de Teleconsulta</h1>
         <ice:panelGroup>
             <h:form>
                 <div align="right">
@@ -20,12 +18,21 @@
                 </div>
             </h:form>
         </ice:panelGroup>
+
+        <h1>Pacientes de Teleconsulta del doctor</h1>
+        <ice:panelGroup>
+            <h:form>
+                <ice:commandButton  action="agregarPaciente"  
+                                        title="Agregar nuevo paciente" value="Agregar nuevo paciente"/>
+                
+            </h:form>
+        </ice:panelGroup>
         <h:form>
             <ice:panelGroup>
 
                 <ice:dataTable
                     id="data"
-                    value="#{teleconsultaBean.pacientes}"
+                    value="#{loginBean.sesion.pacientes}"
                     var="paciente"
                     scrollable="false"
                     scrollHeight="100px"
@@ -52,6 +59,30 @@
                         <f:facet name="header">
                             <ice:outputText
                                 value="Consultar"
+                                style="color:white"/>
+                        </f:facet>
+                        <ice:panelGroup style="background-color: transparent">
+
+                            <ice:commandButton id="DDRtn" value="Consultar" action="#{teleconsultaBean.consultarPaciente(paciente.id)}"/>
+                        </ice:panelGroup>
+                    </ice:column>
+                    
+                    <ice:column>
+                        <f:facet name="header">
+                            <ice:outputText
+                                value="Eliminar"
+                                style="color:white"/>
+                        </f:facet>
+                        <ice:panelGroup style="background-color: transparent">
+
+                            <ice:commandButton id="DDRtn" value="Consultar" action="#{teleconsultaBean.consultarPaciente(paciente.id)}"/>
+                        </ice:panelGroup>
+                    </ice:column>
+                    
+                    <ice:column>
+                        <f:facet name="header">
+                            <ice:outputText
+                                value="Editar"
                                 style="color:white"/>
                         </f:facet>
                         <ice:panelGroup style="background-color: transparent">

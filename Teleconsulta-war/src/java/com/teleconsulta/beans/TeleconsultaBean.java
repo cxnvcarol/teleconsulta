@@ -15,7 +15,6 @@ import com.teleconsulta.servicios.IServicioTeleconsultaMockLocal;
 import com.teleconsulta.servicios.ServicioTeleconsultaMock;
 import java.io.Serializable;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author Juan Sebastián Urrego

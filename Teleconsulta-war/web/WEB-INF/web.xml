@@ -68,7 +68,7 @@
     </session-config>
     <!-- Página de inicio -->
     <welcome-file-list>
-        <welcome-file>index.jsf</welcome-file>
+        <welcome-file>login.jsf</welcome-file>
     </welcome-file-list>
     <login-config>
         <auth-method>FORM</auth-method>
@@ -80,5 +80,13 @@
     <security-role>
         <description/>
         <role-name>rolePaciente</role-name>
+    </security-role>
+    <security-role>
+        <description/>
+        <role-name>rolAdministrador</role-name>
+    </security-role>
+    <security-role>
+        <description>Puede crear y borrar pacientes además de ver el estado de los propios</description>
+        <role-name>rolMedico</role-name>
     </security-role>
 </web-app>

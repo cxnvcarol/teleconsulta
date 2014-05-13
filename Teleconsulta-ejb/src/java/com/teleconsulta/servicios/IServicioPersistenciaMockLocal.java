@@ -10,6 +10,7 @@
  */
 
 package com.teleconsulta.servicios;
+import com.teleconsulta.entities.Paciente;
 import javax.ejb.EJB;
 import javax.ejb.Local;
 
@@ -48,5 +49,7 @@ public interface IServicioPersistenciaMockLocal
      * @return obj Resultado de la consulta.
      */
     public java.lang.Object findById(java.lang.Class c, java.lang.Object id);
+
+    public Paciente findByLogin(String login);
     
 }

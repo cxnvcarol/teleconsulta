@@ -84,4 +84,9 @@ public class ServicioPersistenciaNoSql extends MongoConfig implements IServicioP
     public Object findById(Class c, Object id) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
+    @Override
+    public Paciente findByLogin(String login) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }

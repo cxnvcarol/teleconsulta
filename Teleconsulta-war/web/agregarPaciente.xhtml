@@ -1,0 +1,256 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!--
+    Document   : registro
+    Created on : 14-jul-2011
+    Author     : Juan Sebastián Urrego
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/main-template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ice="http://www.icesoft.com/icefaces/component"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:cc="http://java.sun.com/jsf/composite">
+
+    <ui:param name="titulo" value="Agregar pacientes" />
+    <ui:define name="body">
+        <h:form>
+                <div align="right" style="padding-right: 10px">
+                    <ice:commandButton style="background: transparent" image="./resources/img/pag/atras.png" action="catalogoMedico.jsf"/>
+                </div>
+            </h:form>
+        <ice:panelGroup>
+            <h:form>
+                <div align="right">
+                    <ice:commandButton  action="#{loginBean.logout}"  style="background: transparent;
+                                        padding-right: 12px" image="./resources/img/pag/logOff.png"
+                                        title="Cerrar sesión"/>
+                </div>
+            </h:form>
+        </ice:panelGroup>
+
+        <h:form>
+            <ice:panelCollapsible id="linkPanel" expanded="true" disabled="true">
+                <f:facet name="header">
+                    <ice:outputText id="linkHeader"
+                                    value="Registro de Paciente" style="color:white"/>
+                </f:facet>
+
+                <!-- Panel para registrar un nuevo cliente al sistema -->
+                <h:panelGroup >
+                    <ice:panelGrid columns="2" columnClasses="pnlGrdClass, pnlGrdClass, pnlGrdClassLong">
+                        <h:form>
+                            <h:panelGroup>
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <ice:outputLabel for="TxtID"
+                                                             value="Documento"
+                                                             style="font-weight: bold"/>
+                                        </td>
+                                        <td>
+                                            <ice:inputText id="TxtID"
+                                                           size="20"
+                                                           maxlength="15"
+                                                           value="#{loginBean.nuevoPaciente.id}"
+                                                           
+                                                           required="true">
+
+                                                <f:validateLength minimum="5" />
+
+
+                                            </ice:inputText>
+
+                                        </td>
+                                        
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <ice:message id="messageID" for="TxtID"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <ice:outputLabel for="TxtName"
+                                                             value="Nombre"
+                                                             style="font-weight: bold"/>
+                                        </td>
+                                        <td>
+                                            <ice:inputText id="TxtName"
+                                                           size="20"
+                                                           maxlength="45"
+                                                           value="#{loginBean.nuevoPaciente.nombre}"
+                                                          required="true">
+                                                <f:validateLength minimum="5"/>
+                                            </ice:inputText>
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <ice:message id="messageName" for="TxtName"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <ice:outputLabel for="TxtFechaNac"
+                                                             value="Fecha nacimiento"
+                                                             style="font-weight: bold"
+                                                             />
+                                        </td>
+                                        <td>
+                                            <ice:inputText id="TxtFechaNac"
+                                                           size="20"
+                                                           value="#{loginBean.fechaNacimientoPaciente}"
+                                                           placeholder="dd/mm/aaaa"
+                                                           required="true"
+                                                           title="dd/mm/aaaa">
+                                                <cc:valueHolder name="dd/mm/aaaa"/>
+                                               
+                                            </ice:inputText>
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <ice:message id="messageLocal" for="TxtFechaNac"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <ice:outputLabel for="TxtGenero"
+                                                             value="Género"
+                                                             style="font-weight: bold"/>
+                                        </td>
+                                        <td>
+                                            <ice:inputText id="TxtGenero"
+                                                           size="20"
+                                                           maxlength="10"
+                                                           value="#{loginBean.nuevoPaciente.genero}"
+                                                           required="true">
+                                            </ice:inputText>
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <ice:message id="messageCel" for="TxtGenero"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <ice:outputLabel for="TxtEstatura"
+                                                             value="Estatura (cm)"
+                                                             style="font-weight: bold"/>
+                                        </td>
+                                        <td>
+                                            <ice:inputText id="TxtEstatura"
+                                                           size="20"
+                                                           maxlength="10"
+                                                           value="#{loginBean.nuevoPaciente.estatura}"
+                                                           required="true">
+                                            </ice:inputText>
+
+                                        </td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td>
+                                            <ice:outputLabel for="TxtLog"
+                                                             value="Login"
+                                                             style="font-weight: bold"/>
+                                        </td>
+                                        <td>
+                                            <ice:inputText id="TxtLog"
+                                                           size="20"
+                                                           maxlength="15"
+                                                           value="#{loginBean.nuevoPaciente.login}"
+                                                           
+                                                           required="true">
+                                            </ice:inputText>
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <ice:message id="messageLog" for="TxtLog"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <ice:outputLabel for="TxtPwd"
+                                                             value="Contraseña"
+                                                             style="font-weight: bold"/>
+                                        </td>
+                                        <td>
+                                            <ice:inputSecret id="TxtPwd"
+                                                             maxlength="20"
+                                                             size="20"
+                                                             value="#{loginBean.nuevoPaciente.contrasena}"
+
+                                                             required="true">
+                                                <f:validateLength minimum="3" maximum="15" />
+                                            </ice:inputSecret>
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <ice:message id="messagePwd" for="TxtPwd"/>
+                                        </td>
+                                    </tr>
+
+                                </table>
+
+                                <ice:commandButton value="Aceptar" action="#{loginBean.agregarPaciente}"/>
+                            </h:panelGroup>
+
+                        </h:form>
+                        <h:panelGroup style="padding-left: 80px;background-color: white">
+                            <h:graphicImage url="./resources/img/pag/newUser.png" title="Nuevo usuario" width="256" height="256"/>
+                        </h:panelGroup>
+                    </ice:panelGrid>
+                </h:panelGroup>
+            </ice:panelCollapsible>
+
+        </h:form>
+
+
+        <h:form>
+
+            <!-- Se establecen las propiedades para el panel popup de confirmación-->
+            <ice:panelPopup id="popupDiv"
+                            rendered="true"
+                            visible="#{loginBean.mostrarVentana}"
+                            modal="true">
+
+                <f:facet name="header">
+                    <ice:panelGrid columns="2" columnClasses="er1,er2">
+                        <ice:outputText value="Muebles de los Alpes"/>
+                    </ice:panelGrid>
+                </f:facet>
+                <f:facet name="body">
+
+                    <h:panelGroup>
+
+                        <ice:panelGrid width="100%" cellpadding="0" columns="2" style="background-position: center"
+                                       cellspacing="10" styleClass="popupModalBody">
+                            <ice:graphicImage url="./resources/img/graphics/warning.png"/>
+                            <ice:outputText
+                                value="#{loginBean.mensaje}"/>
+                        </ice:panelGrid>
+                        <ice:panelGroup style="vertical-align: middle;background: transparent">
+
+                            <div align="center">
+                                <ice:commandButton id="closeModal"
+                                                   actionListener="#{loginBean.cerrarVentana}"
+                                                   value="Cerrar" style="z-index:2;"/>
+                            </div>
+                        </ice:panelGroup>
+                    </h:panelGroup>
+                </f:facet>
+            </ice:panelPopup>
+        </h:form>
+    </ui:define>
+</ui:composition>
