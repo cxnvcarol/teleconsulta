@@ -28,11 +28,11 @@ public class ServicioPersistenciaNoSql extends MongoConfig implements IServicioP
     public ServicioPersistenciaNoSql()
     {
         super();
-        int i=1;
+        int i=7;
         Date fNac=new Date();
         fNac.setYear(fNac.getYear()-5-i*i);
-        //Paciente nuevo=new Paciente("000"+i,"Maria Jose "+(i+1), fNac,(i%3==0?Paciente.MASCULINO:Paciente.FEMENINO),150);
-        //create(nuevo);
+        Paciente nuevo=new Paciente("000"+i,"Maria Jose "+(i+1), fNac,(i%3==0?Paciente.MASCULINO:Paciente.FEMENINO),150);
+        create(nuevo);
     }
     @Override
     public void create(Object obj) {

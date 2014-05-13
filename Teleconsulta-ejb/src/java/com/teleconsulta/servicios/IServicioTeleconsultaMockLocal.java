@@ -5,7 +5,6 @@
  * Departamento de Ingeniería de Sistemas y Computación
  * Licenciado bajo el esquema Academic Free License version 3.0
  *
- * Ejercicio: Muebles de los Alpes
  * Autor: Juan Sebastián Urrego
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
@@ -23,8 +22,6 @@ public interface IServicioTeleconsultaMockLocal
 {
 
     /**
-     * Devuelve todos los muebles del sistema
-     * @return muebles Lista de muebles
      */
     public List<Paciente> darPacientes();
 

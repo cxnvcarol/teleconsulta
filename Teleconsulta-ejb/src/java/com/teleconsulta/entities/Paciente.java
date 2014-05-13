@@ -4,16 +4,21 @@
  * Ingeniería de Sistemas y Computación Licenciado bajo el esquema Academic Free
  * License version 3.0
  *
- * Ejercicio: Muebles de los Alpes Autor: Juan Sebastián Urrego
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
 package com.teleconsulta.entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
 
-public class Paciente {
+@Entity
+public class Paciente implements Serializable{
 
     private final static String ALARMA_HIP_BAJA = "El paciente presenta condicienes anormales de hipertension baja";
     private final static String ALARMA_HIP_ALTA = "El paciente presenta condicienes anormales de hipertension alta";
@@ -40,7 +45,10 @@ public class Paciente {
      * Nombre del usuario
      */
     private String nombre;
+    
+    @Id
     private String id;
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaNacimiento;
     private String genero;
     private int estatura;
@@ -48,9 +56,13 @@ public class Paciente {
     /**
      * Devuelve un lista con todos las compras del usuario
      */
-    private ArrayList<MedidaPeso> pesos;
-    private ArrayList<MedidaPresion> presiones;
-    private ArrayList<Alarma> alarmas;
+    
+    @OneToMany
+    private List<MedidaPeso> pesos;
+    @OneToMany
+    private List<MedidaPresion> presiones;
+    @OneToMany
+    private List<Alarma> alarmas;
 
     //-----------------------------------------------------------
     // Constructores
@@ -59,6 +71,9 @@ public class Paciente {
      * Constructor de la clase sin argumentos
      */
     public Paciente() {
+        pesos = new ArrayList<MedidaPeso>();
+        presiones = new ArrayList<MedidaPresion>();
+        alarmas=new ArrayList<Alarma>();
     }
 
     /**
@@ -114,7 +129,7 @@ public class Paciente {
     /**
      * @return the pesos
      */
-    public ArrayList<MedidaPeso> getPesos() {
+    public List<MedidaPeso> getPesos() {
         return pesos;
     }
 

@@ -4,16 +4,31 @@
  */
 package com.teleconsulta.entities;
 
+import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
 
 /**
  *
  * @author Estudiante
  */
-public class MedidaPresion {
+
+@Entity
+public class MedidaPresion implements Serializable {
     private double sistolica;
     private double diastolica;
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha;
+    @Id
+    @GeneratedValue
+    private Long id;
+
+    public MedidaPresion() {
+    }
     
     public MedidaPresion(double sist, double diast) {
         sistolica=sist;
@@ -34,6 +49,14 @@ public class MedidaPresion {
     public String toString()
     {
         return getPresion()+"";
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
     
 }

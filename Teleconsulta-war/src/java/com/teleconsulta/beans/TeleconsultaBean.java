@@ -18,7 +18,6 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Managed bean encargado del catálogo de muebles en el sistema
  * @author Juan Sebastián Urrego
  */
 public class TeleconsultaBean implements Serializable

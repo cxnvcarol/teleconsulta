@@ -5,7 +5,6 @@
  * Departamento de Ingeniería de Sistemas y Computación
  * Licenciado bajo el esquema Academic Free License version 3.0
  *
- * Ejercicio: Muebles de los Alpes
  * Autor: Juan Sebastián Urrego
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
@@ -13,30 +12,50 @@
 package com.teleconsulta.servicios;
 
 import com.teleconsulta.entities.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.FlushModeType;
+import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
+import javax.transaction.HeuristicMixedException;
+import javax.transaction.HeuristicRollbackException;
+import javax.transaction.NotSupportedException;
+import javax.transaction.RollbackException;
+import javax.transaction.SystemException;
+import javax.transaction.UserTransaction;
 
 /**
  * Implementación de los servicios de persistencia
  * @author Juan Sebastián Urrego
  */
-//@Stateless
+@Stateless
 @EJB(beanInterface = IServicioPersistenciaMockLocal.class, beanName = 
 "ServicioPersistenciaMock", name = "servicioPersistencia")
-public class ServicioPersistenciaMock implements  IServicioPersistenciaMockLocal {
+public class ServicioPersistenciaMock implements  IServicioPersistenciaMockLocal, Serializable {
 
     //-----------------------------------------------------------
     // Atributos
     //-----------------------------------------------------------
 
     /**
+     * La entidad encargada de persistir en la base de datos
+     */
+    @PersistenceContext
+    private EntityManager entityManager;
+    /**
      * Lista con los vendedores del sistema
      */
-    private static ArrayList<Paciente> pacientes;
+    //private static ArrayList<Paciente> pacientes;
 
     
     //-----------------------------------------------------------
@@ -48,19 +67,27 @@ public class ServicioPersistenciaMock implements  IServicioPersistenciaMockLocal
      */
     public ServicioPersistenciaMock()
     {
-        if (pacientes == null)
+        if (entityManager == null)
         {
-            pacientes = new ArrayList<Paciente>();
-            for(int i=0;i<10;i++)
+            EntityManagerFactory ef=Persistence.createEntityManagerFactory("Teleconsulta-ejbPU");
+            entityManager=ef.createEntityManager();
+            if(findAll(Paciente.class).isEmpty())
+            {
+                createScenario();
+            }
+            entityManager.setFlushMode(FlushModeType.COMMIT);
+        }
+    }
+
+    public void createScenario(){
+         for(int i=0;i<10;i++)
             {
                 Date fNac=new Date();
                 fNac.setYear(fNac.getYear()-5-i*i);
                 Paciente nuevo=new Paciente("000"+i,"Maria Jose "+(i+1), fNac,(i%3==0?Paciente.MASCULINO:Paciente.FEMENINO),150);
-                pacientes.add(nuevo);
+                create(nuevo);
             }
-        }
     }
-
     //-----------------------------------------------------------
     // Métodos
     //-----------------------------------------------------------
@@ -70,15 +97,31 @@ public class ServicioPersistenciaMock implements  IServicioPersistenciaMockLocal
      * @param obj Objeto que representa la instancia de la entidad que se quiere crear.
      */
     @Override
-    public void create(Object obj)
-    {
-        if (obj instanceof Paciente)
-        {
-            Paciente p = (Paciente) obj;
-            pacientes.add(p);
+    public void create(Object t) {
+        try {
+            UserTransaction transaction = (UserTransaction) new InitialContext().lookup("java:comp/UserTransaction");
+            transaction.begin();
+            // persist object - add to entity manager
+            entityManager.persist(t);
+            // flush em - save to DB
+            entityManager.flush();
+            transaction.commit();
+        } catch (RollbackException ex) {
+            Logger.getLogger(ServicioPersistenciaMock.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (HeuristicMixedException ex) {
+            Logger.getLogger(ServicioPersistenciaMock.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (HeuristicRollbackException ex) {
+            Logger.getLogger(ServicioPersistenciaMock.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SecurityException ex) {
+            Logger.getLogger(ServicioPersistenciaMock.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalStateException ex) {
+            Logger.getLogger(ServicioPersistenciaMock.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NotSupportedException ex) {
+            Logger.getLogger(ServicioPersistenciaMock.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SystemException ex) {
+            Logger.getLogger(ServicioPersistenciaMock.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NamingException ex) {
         }
-        //else if (obj instanceof Mueble)...
-       
     }
 
     /**
@@ -88,23 +131,30 @@ public class ServicioPersistenciaMock implements  IServicioPersistenciaMockLocal
     @Override
     public void update(Object obj)
     {
-        if (obj instanceof Paciente)
-        {
-            Paciente editar = (Paciente) obj;
-            Paciente vendedor;
-            for (int i = 0; i < pacientes.size(); i++)
-            {
-                vendedor = pacientes.get(i);
-                if (vendedor.getId().equals(editar.getId()))
-                {
-                    pacientes.set(i, editar);
-                    break;
-                }
-
-            }
-
-        }
-        
+        try {
+            UserTransaction transaction = (UserTransaction) new InitialContext().lookup("java:comp/UserTransaction");
+            transaction.begin();
+            // persist object - add to entity manager
+            entityManager.merge(obj);
+            // flush em - save to DB
+            entityManager.flush();
+            transaction.commit();
+        } catch (RollbackException ex) {
+            Logger.getLogger(ServicioPersistenciaMock.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (HeuristicMixedException ex) {
+            Logger.getLogger(ServicioPersistenciaMock.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (HeuristicRollbackException ex) {
+            Logger.getLogger(ServicioPersistenciaMock.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SecurityException ex) {
+            Logger.getLogger(ServicioPersistenciaMock.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalStateException ex) {
+            Logger.getLogger(ServicioPersistenciaMock.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NotSupportedException ex) {
+            Logger.getLogger(ServicioPersistenciaMock.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SystemException ex) {
+            Logger.getLogger(ServicioPersistenciaMock.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NamingException ex) {
+        }        
     }
 
 
@@ -116,16 +166,7 @@ public class ServicioPersistenciaMock implements  IServicioPersistenciaMockLocal
     @Override
     public List findAll(Class c)
     {
-        if (c.equals(Paciente.class))
-        {
-            return pacientes;
-        } 
-        //else if (c.equals(Vendedor.class))
-        
-        else
-        {
-            return null;
-        }
+        return entityManager.createQuery("select O from " + c.getSimpleName() + " as O").getResultList();
     }
 
     /**
@@ -135,21 +176,9 @@ public class ServicioPersistenciaMock implements  IServicioPersistenciaMockLocal
      * @return obj Resultado de la consulta.
      */
     @Override
-    public Object findById(Class c, Object id)
-    {
-        if (c.equals(Paciente.class))
-        {
-            for (Object v : findAll(c))
-            {
-                Paciente ven = (Paciente) v;
-                if (ven.getId().equals(id))
-                {
-                    return ven;
-                }
-            }
-        } 
-        //else if (c.equals(Mueble.class))
-        
-        return null;
+    public Object findById(Class c, Object id) {
+        Object returned=entityManager.find(c, id);
+        entityManager.refresh(returned);
+        return returned;
     }
 }
