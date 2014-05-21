@@ -56,6 +56,12 @@ public class TeleconsultaBean implements Serializable
         pacienteDetalle= servicio.darPaciente(id);
         return "paciente";
     }
+    public String eliminarPaciente(String id)
+    {
+        pacienteDetalle= servicio.darPaciente(id);
+        servicio.delete(pacienteDetalle);
+        return "medico";
+    }
     public Paciente getPacienteDetalle()
     {
         return pacienteDetalle;

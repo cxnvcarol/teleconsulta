@@ -204,4 +204,9 @@ public class ServicioPersistenciaMock implements  IServicioPersistenciaMockLocal
         return null;
         //return (Paciente) entityManager.createQuery("select O from " + Paciente.class.getSimpleName() + " as O where login="+login).getResultList().get(0);
     }
+
+    @Override
+    public void delete(Paciente pacienteDetalle) {
+        entityManager.remove(pacienteDetalle);
+    }
 }

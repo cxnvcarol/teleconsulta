@@ -45,4 +45,6 @@ public interface IServicioTeleconsultaMockLocal
     public String pushPresion(String id, double sistolica, double diastolica);
 
     public Paciente darPorLogin(String login);
+
+    public void delete(Paciente pacienteDetalle);
 }

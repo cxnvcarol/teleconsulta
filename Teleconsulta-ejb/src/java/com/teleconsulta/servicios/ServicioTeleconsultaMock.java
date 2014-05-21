@@ -98,4 +98,10 @@ public class ServicioTeleconsultaMock implements IServicioTeleconsultaMockLocal 
     public Paciente darPorLogin(String login) {
         return persistencia.findByLogin(login);
     }
+
+    @Override
+    public void delete(Paciente pacienteDetalle) {
+        persistencia.delete(pacienteDetalle);
+    }
+    
 }

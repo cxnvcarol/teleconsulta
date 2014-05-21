@@ -51,5 +51,7 @@ public interface IServicioPersistenciaMockLocal
     public java.lang.Object findById(java.lang.Class c, java.lang.Object id);
 
     public Paciente findByLogin(String login);
+
+    public void delete(Paciente pacienteDetalle);
     
 }

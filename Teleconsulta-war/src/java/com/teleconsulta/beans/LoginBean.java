@@ -311,6 +311,7 @@ public class LoginBean implements Serializable
         return nuevoPaciente;
     }
 
+    
     public void agregarPaciente()
     {
         if(sesion!=null && sesion.getTipoUsuario().equals(TipoUsuario.Medico))
